@@ -27,3 +27,24 @@ jobs:
           Parser().feed(text)
           print("OSOGIL standalone page smoke checks passed.")
           PY
+      - name: Validate Dice Arena entry, Who Am I lock, and JavaScript syntax
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          page = Path("index.html").read_text(encoding="utf-8")
+          dice = re.search(r"\{ id:'dice'.*", page).group(0)
+          who = re.search(r"\{ id:'who'.*", page).group(0)
+          assert "stage:'playable'" in dice and "url:'https://dice-arena-online.onrender.com'" in dice
+          assert "stage:'developing'" in who and "url:null" in who
+          assert "const FEATURED=GAMES.filter(g=>g.id!=='who')" in page
+          assert "if(locked){card.querySelector('.favorite').remove()" in page
+          assert "card.append(overlay);return card}" in page
+          assert "card.querySelector('.card-more').addEventListener" in page
+          assert "WHO AM I?는 개발 중이며 잠겨 있습니다." in page
+          scripts = re.findall(r"<script[^>]*>(.*?)</script>", page, re.S | re.I)
+          assert scripts, "No executable JS found"
+          Path("_osogil_inline.js").write_text(scripts[-1], encoding="utf-8")
+          print("Game status/lock regression checks passed.")
+          PY
+          node --check _osogil_inline.js
