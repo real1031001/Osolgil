@@ -2,12 +2,12 @@
 
 직접 제작한 웹게임들을 모아 보여주는 레트로 네온 아케이드 게임 포털입니다.
 
-## 현재 버전: v0.4
+## 현재 버전: v0.5
 
 - 반응형 PC/모바일 화면
 - 게임 카드, 메인 배너, 검색, 장르별 필터, 즐겨찾기
 - 게임 상세 보기 및 실제 게임 링크
-- DICE ARENA 정식 플레이 링크 추가, WHO AM I? 개발 중 잠금 카드(클릭·즐겨찾기·상세보기 불가)
+- DICE ARENA와 WHO AM I? 정식 게임 링크 활성화, 4개 게임 모두 플레이 선택 가능
 - CSS, JS, 픽셀아트 이미지가 포함된 **단일 index.html** (별도 서버와 빌드 불필요)
 
 ## 등록 게임
@@ -17,7 +17,7 @@
 | BATTLESHIP — Naval Command | 기존 게임 연결 | https://battleship-naval-command.onrender.com |
 | QUIZ ARENA 15 | 기존 게임 연결 | https://quiz-arena-15-online.onrender.com |
 | DICE ARENA | 정식 플레이 링크 | https://dice-arena-online.onrender.com |
-| WHO AM I? | 개발 중 · 잠금 (선택 불가) | 공개 전까지 클릭 불가 |
+| WHO AM I? | 정식 플레이 링크 | https://who-am-i-wixa.onrender.com |
 
 > 위 Render 주소는 코드에 등록된 링크이며 **실제 서버 가동/접속 상태를 보증하지 않습니다**. 별도로 확인해야 합니다. 무료 서비스가 절전 모드에서 깨어나는 동안 최초 접속에 시간이 걸릴 수 있습니다.
 
