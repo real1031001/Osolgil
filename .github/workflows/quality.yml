@@ -37,7 +37,7 @@ jobs:
           who = re.search(r"\{ id:'who'.*", page).group(0)
           assert "stage:'playable'" in dice and "url:'https://dice-arena-online.onrender.com'" in dice
           assert "stage:'playable'" in who and "url:'https://who-am-i-wixa.onrender.com'" in who
-          assert "const FEATURED=GAMES.filter(g=>g.stage=='playable'&&!!g.url)" in page
+          assert "const FEATURED=GAMES.filter(g=>g.stage==='playable'&&!!g.url)" in page
           assert "const locked=!hasUrl(g)" in page
           assert "if(locked){card.querySelector('.favorite').remove()" in page
           assert "card.append(overlay);return card}" in page
