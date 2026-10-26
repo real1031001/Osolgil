@@ -27,7 +27,7 @@ jobs:
           Parser().feed(text)
           print("OSOGIL standalone page smoke checks passed.")
           PY
-      - name: Validate Dice Arena entry, Who Am I lock, and JavaScript syntax
+      - name: Validate four playable game links and JavaScript syntax
         run: |
           python - <<'PY'
           import re
@@ -36,15 +36,19 @@ jobs:
           dice = re.search(r"\{ id:'dice'.*", page).group(0)
           who = re.search(r"\{ id:'who'.*", page).group(0)
           assert "stage:'playable'" in dice and "url:'https://dice-arena-online.onrender.com'" in dice
-          assert "stage:'developing'" in who and "url:null" in who
-          assert "const FEATURED=GAMES.filter(g=>g.id!=='who')" in page
+          assert "stage:'playable'" in who and "url:'https://who-am-i-wixa.onrender.com'" in who
+          assert "const FEATURED=GAMES.filter(g=>g.stage=='playable'&&!!g.url)" in page
+          assert "const locked=!hasUrl(g)" in page
           assert "if(locked){card.querySelector('.favorite').remove()" in page
           assert "card.append(overlay);return card}" in page
           assert "card.querySelector('.card-more').addEventListener" in page
-          assert "WHO AM I?는 개발 중이며 잠겨 있습니다." in page
+          assert "WHO AM I? 오솔길 정식 합류!" in page
+          assert "후 앰 아이: 게임 플레이 오픈!" in page
+          assert 'id="stat-play-count">04' in page
+          assert 'id="banner-counter">01/04' in page
           scripts = re.findall(r"<script[^>]*>(.*?)</script>", page, re.S | re.I)
           assert scripts, "No executable JS found"
           Path("_osogil_inline.js").write_text(scripts[-1], encoding="utf-8")
-          print("Game status/lock regression checks passed.")
+          print("All four playable game entries verified.")
           PY
           node --check _osogil_inline.js
